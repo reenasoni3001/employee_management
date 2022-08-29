@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button } from "@mui/material";
-import { deleteUser, editUser } from "../features/employeeSlice";
+import { deleteUser } from "../features/employeeSlice";
 import { useDispatch } from "react-redux/es/exports";
 import EditEmployee from "../components/EditEmployee";
 
@@ -34,10 +34,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const List = ({ employees, setOpen }) => {
   const dispatch = useDispatch();
-  //console.log("list m data", employees);
-  // function handleClick(value) {
-  //   dispatch(editUser(value.id));
-  // }
 
   return (
     <TableContainer component={Paper}>

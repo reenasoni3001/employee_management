@@ -1,7 +1,6 @@
 import "./App.css";
 import EmployeeDetails from "./components/EmployeeDetails";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Department from "./components/Department";
 import DepartmentList from "./components/DepartmentList";
 
 function App() {

@@ -6,26 +6,14 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Typography,
 } from "@material-ui/core";
 import { useFormik } from "formik";
-import { addUserSchema } from "../Schema/formValidation";
-import { useDispatch, useSelector } from "react-redux/es/exports";
+import { employeeSchema } from "../Schema/formValidation";
+import { useDispatch } from "react-redux/es/exports";
 import { editUser } from "../features/employeeSlice";
-//import { List } from "@mui/material";
-import List from "../UI/List";
-
-// const initialValues = {
-//   firstName: "",
-//   lastName: "",
-//   age: "",
-//   salary: "",
-//   department: "",
-// };
 
 export default function EditEmployee({ employee }) {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees);
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
@@ -36,7 +24,7 @@ export default function EditEmployee({ employee }) {
         salary: employee.salary,
         department: employee.department,
       },
-      validationSchema: addUserSchema,
+      validationSchema: employeeSchema,
       onSubmit: (values, action) => {
         dispatch(editUser({ ...values, id: employee.id }));
         action.resetForm();
@@ -75,7 +63,7 @@ export default function EditEmployee({ employee }) {
             onBlur={handleBlur}
           />
           {errors.firstName && touched.firstName ? (
-            <p style={{ color: "red" }}>{errors.firstName}</p>
+            <span style={{ color: "red" }}>{errors.firstName}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -90,7 +78,7 @@ export default function EditEmployee({ employee }) {
             onBlur={handleBlur}
           />
           {errors.lastName && touched.lastName ? (
-            <p style={{ color: "red" }}>{errors.lastName}</p>
+            <span style={{ color: "red" }}>{errors.lastName}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -105,7 +93,7 @@ export default function EditEmployee({ employee }) {
             onBlur={handleBlur}
           />
           {errors.age && touched.age ? (
-            <p style={{ color: "red" }}>{errors.age}</p>
+            <span style={{ color: "red" }}>{errors.age}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -120,7 +108,7 @@ export default function EditEmployee({ employee }) {
             onBlur={handleBlur}
           />
           {errors.salary && touched.salary ? (
-            <p style={{ color: "red" }}>{errors.salary}</p>
+            <span style={{ color: "red" }}>{errors.salary}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -135,16 +123,14 @@ export default function EditEmployee({ employee }) {
             onBlur={handleBlur}
           />
           {errors.department && touched.department ? (
-            <p style={{ color: "red" }}>{errors.department}</p>
+            <span style={{ color: "red" }}>{errors.department}</span>
           ) : null}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Add user</Button>
+          <Button onClick={handleSubmit}>Edit</Button>
         </DialogActions>
       </Dialog>
-      {/* <br></br>
-      <List employee={employees} /> */}
     </div>
   );
 }

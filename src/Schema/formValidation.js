@@ -1,8 +1,7 @@
 import * as Yup from "yup";
 import moment from "moment";
-//const moment = require("moment");
 
-export const addUserSchema = Yup.object({
+export const employeeSchema = Yup.object({
   firstName: Yup.string()
     .min(3)
     .max(25)

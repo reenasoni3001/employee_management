@@ -1,6 +1,4 @@
 import * as Yup from "yup";
-//import moment from "moment";
-//const moment = require("moment");
 
 export const departmentSchema = Yup.object({
   departmentName: Yup.string()

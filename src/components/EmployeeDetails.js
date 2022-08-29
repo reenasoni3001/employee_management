@@ -9,10 +9,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useFormik } from "formik";
-import { addUserSchema } from "../Schema/formValidation";
+import { employeeSchema } from "../Schema/formValidation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { addUser } from "../features/employeeSlice";
 import List from "../UI/List";
+import { Link } from "react-router-dom";
+import Header from "./Header";
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -28,7 +30,7 @@ export default function EmployeeDetails() {
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
-      validationSchema: addUserSchema,
+      validationSchema: employeeSchema,
       onSubmit: (values, action) => {
         dispatch(addUser({ ...values, id: Date.now() }));
         action.resetForm();
@@ -48,12 +50,14 @@ export default function EmployeeDetails() {
 
   return (
     <div>
-      <Typography variant="h3" fontWeight="bold" align="center" mt={3}>
-        Employee Data Management
-      </Typography>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Add User
-      </Button>
+      <Header />
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}
+      >
+        <Button variant="outlined" onClick={handleClickOpen}>
+          Add User
+        </Button>
+      </div>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Employee details</DialogTitle>
         <DialogContent>
@@ -70,7 +74,7 @@ export default function EmployeeDetails() {
             onBlur={handleBlur}
           />
           {errors.firstName && touched.firstName ? (
-            <p style={{ color: "red" }}>{errors.firstName}</p>
+            <span style={{ color: "red" }}>{errors.firstName}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -85,7 +89,7 @@ export default function EmployeeDetails() {
             onBlur={handleBlur}
           />
           {errors.lastName && touched.lastName ? (
-            <p style={{ color: "red" }}>{errors.lastName}</p>
+            <span style={{ color: "red" }}>{errors.lastName}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -100,7 +104,7 @@ export default function EmployeeDetails() {
             onBlur={handleBlur}
           />
           {errors.age && touched.age ? (
-            <p style={{ color: "red" }}>{errors.age}</p>
+            <span style={{ color: "red" }}>{errors.age}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -115,7 +119,7 @@ export default function EmployeeDetails() {
             onBlur={handleBlur}
           />
           {errors.salary && touched.salary ? (
-            <p style={{ color: "red" }}>{errors.salary}</p>
+            <span style={{ color: "red" }}>{errors.salary}</span>
           ) : null}
           <TextField
             margin="dense"
@@ -130,7 +134,7 @@ export default function EmployeeDetails() {
             onBlur={handleBlur}
           />
           {errors.department && touched.department ? (
-            <p style={{ color: "red" }}>{errors.department}</p>
+            <span style={{ color: "red" }}>{errors.department}</span>
           ) : null}
         </DialogContent>
         <DialogActions>
@@ -139,7 +143,12 @@ export default function EmployeeDetails() {
         </DialogActions>
       </Dialog>
       <br></br>
-      <List employees={employees} setOpen={setOpen} />
+      <div style={{ padding: "20px" }}>
+        <List employees={employees} setOpen={setOpen} />
+      </div>
+      {/* <Link to="/department">
+        <Button>Go to Department</Button>
+      </Link> */}
     </div>
   );
 }
