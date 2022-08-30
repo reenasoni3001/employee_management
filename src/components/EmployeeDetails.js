@@ -6,14 +6,12 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Typography,
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import { employeeSchema } from "../Schema/formValidation";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { addUser } from "../features/employeeSlice";
 import List from "../UI/List";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 const initialValues = {
   firstName: "",
@@ -26,6 +24,13 @@ const initialValues = {
 export default function EmployeeDetails() {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees);
+  const searchText = useSelector((state) => state.searchText);
+
+  const filteredEmployees = searchText
+    ? employees.filter((employee) =>
+        employee.firstName.toLowerCase().includes(searchText)
+      )
+    : employees;
 
   const { values, errors, handleBlur, touched, handleChange, handleSubmit } =
     useFormik({
@@ -144,11 +149,8 @@ export default function EmployeeDetails() {
       </Dialog>
       <br></br>
       <div style={{ padding: "20px" }}>
-        <List employees={employees} setOpen={setOpen} />
+        <List employees={filteredEmployees} />
       </div>
-      {/* <Link to="/department">
-        <Button>Go to Department</Button>
-      </Link> */}
     </div>
   );
 }

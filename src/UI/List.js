@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const List = ({ employees, setOpen }) => {
+const List = ({ employees }) => {
   const dispatch = useDispatch();
 
   return (

@@ -1,14 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-//import employeeReducer from "./employeeSlice";
-//import { addUser } from "./employeeSlice";
-
-// export const addWithThunk = createAsyncThunk(
-//   "names/addWithThunk",
-//   async (employees, { getState }) => {
-//     console.log("action", getState().action.payload);
-//     return employees + getState().employees;
-//   }
-// );
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = [];
 
@@ -21,7 +11,7 @@ const departmentSlice = createSlice({
       state.push(action.payload);
     },
     deleteUser: (state, action) => {
-      return state.filter((value) => value.id !== action.payload);
+      return state.filter((value) => value.departmentName !== action.payload);
     },
   },
 });

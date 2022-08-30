@@ -8,6 +8,8 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux/es/exports";
+import { searchText } from "../features/searchSlice";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -52,6 +54,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const dispatch = useDispatch();
+
+  const [search, setSearch] = React.useState("");
+
+  React.useEffect(() => {
+    dispatch(searchText(search));
+  }, [search, dispatch]);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -74,6 +84,8 @@ export default function Header() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </Search>
         </Toolbar>
